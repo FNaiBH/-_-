@@ -1,0 +1,12 @@
+/* pages/movement/movement.wxss */
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 15px;
+    width: 60%;
+}
+
+
+.weui-btn{
+   width: 100%;
+}
+

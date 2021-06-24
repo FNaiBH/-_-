@@ -1,0 +1,40 @@
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">运动列表</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">选择类型</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindTypeChange" value="{{typeIndex}}" range="{{types}}">
+            <view class="weui-select weui-select_in-select-after">{{movementType}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+
+      <block wx:for="{{movementData}}">
+        <view wx:if="{{item[3] == movementType}}" class="weui-cell">
+          <view class="weui-cell__bd">{{item[0]}}</view>
+          <picker id='{{index}}' bindchange="bindPickerChange" value="{{start}}" range="{{array}}">
+            <view class="weui-cell__ft">{{item[2]}} 分钟</view>
+          </picker>
+        </view>
+      </block>
+    </view>
+
+  </view>
+      <view class='page_hd'>  
+      <view class="page__bd page__bd_spacing"> 
+            
+         <view class="button-sp-area">
+            <button class="weui-btn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="true" disabled="{{disabled}}" bindtap="done"> 完成</button>        
+         </view>
+      </view>
+      
+    </view>
+</view>

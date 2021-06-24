@@ -1,0 +1,72 @@
+<view class="page">
+    <!-- <view class="page__hd" id="top" style="background-image:url(/images/background.jpg);background-repeat: repeat-x;"> -->
+  <view class="userinfo">
+    <block wx:if="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 登录 </button>
+    </block>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+    <view class="page__bd">
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd"><image src='/images/sex.png' mode="aspectFit" style="width:25px; height:25px;"></image>
+                性别
+                </view>
+                <radio-group class="radio-group" bindchange="sexChange">
+                   <label class="radio" wx:for="{{sex}}">
+                      <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+                   </label>
+                </radio-group>
+            </view>
+            <view class="weui-cell">
+                <view class="weui-cell__bd"><image src='/images/height.png' mode="aspectFit" style="width:25px; height:25px;"></image>
+                身高
+                </view>
+                <picker bindchange="bindHeightChange" value="{{height-140}}" range="{{array1}}"  >
+                  <view class="picker">{{height}} cm</view>
+                </picker>
+            </view>
+            <view class="weui-cell">
+                <view class="weui-cell__bd"><image src='/images/weight.png' mode="aspectFit" style="width:25px; height:25px;"></image>
+                体重
+                </view>
+                <picker bindchange="bindWeightChange" value="{{weight-30}}" range="{{array2}}" >
+                  <view class="picker">{{weight}} kg</view>
+                </picker>
+            </view>
+            <view class="weui-cell">
+                <view class="weui-cell__bd"><image src='/images/age.png' mode="aspectFit" style="width:25px; height:25px;"></image>
+                年龄
+                </view>
+                <picker bindchange="bindAgeChange" value="{{age-11}}" range="{{array3}}" >
+                  <view class="picker">{{age}} 岁</view>
+                </picker>
+            </view>
+        </view>
+        </view>
+
+
+      <view class='page_hd'>  
+      <view class="page__bd page__bd_spacing"> 
+        <view class="weui-cell" >
+            <text>基础代谢消耗</text>
+            <text class="data">{{daixie}}</text>
+            <text class='unit'>大卡</text>
+         </view>          
+         <view class="button-sp-area">
+            <button class="weui-btn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="true" disabled="{{disabled}}" bindtap="consume"> BMR查询</button>        
+         </view>
+
+         <view class="weui-cell">        
+               <text>身高体重指数</text>
+               <text class='data'>{{BMI}}</text>
+         </view>
+         <view class="button-sp-area">
+            <button class="weui-btn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="true" disabled="{{disabled}}" bindtap="bmi" > BMI查询</button>
+         </view>
+    </view>
+</view>
+</view>

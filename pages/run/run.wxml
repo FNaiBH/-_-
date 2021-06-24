@@ -1,0 +1,88 @@
+<view hidden="{{clockShow}}">
+  <view class="page">
+    <view class="page__hd">
+      <view class="page__title">体力活动能量消耗</view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+      <!--<view class="weui-cells weui-cells_after-title" style='margin-bottom: 5px'>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">体重</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+              <view class="weui-input"><label class='weight'>{{infoWeight}}</label> 公斤</view>
+            </picker>
+          </view>
+        </view>
+      </view>-->
+      <view class="weui-cells weui-cells_after-title {{totalCal ? 'weui-cells_show' : 'weui-cells_hide'}}" style='margin-bottom: 5px'>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">燃烧卡路里</view>
+          </view>
+          <view class="weui-cell__bd">
+              <view class="weui-input"><label class='result'>{{totalCal}}</label> 大卡</view>
+          </view>
+        </view>
+      </view>
+      <view class="kind-list">
+        <view class="kind-list__item">
+          <view class="weui-flex kind-list__item-hd" bindtap="kindToggle">
+
+            <view class="weui-flex__item">
+              <view class="weui-badge" style="margin-right: 10px;">{{list_length}}</view>运动</view>
+              <view>
+            <image class="kind-list__img" src="/images/add.png" bindtap="addMovement"></image>
+            </view>
+          </view>
+          <view class="kind-list__item-bd {{item_open ? 'kind-list__item-bd_show' : ''}}">
+              <view class="weui-cells weui-cells_dp {{item_open ? 'weui-cells_show' : ''}}">
+                <block wx:for="{{list}}" wx:for-item="item" wx:key="*this">
+                  <view class="weui-cell weui-cell_access">
+                    <view class="weui-cell__bd">{{item[3]}}:{{item[0]}}</view>
+                    <view class="weui-cell__ft">{{item[2]}} 分钟</view>
+                    <view style='padding-left:20px'><icon type="cancel" size="23" bindtap='delMovement' id='{{index}}'></icon></view>
+                  </view>
+                </block>
+              </view>
+            </view>
+        </view>
+      </view>
+    </view>
+    <view class="slider">
+      <slider min="1" max="60" show-value activeColor="#34a4f4" backgroundColor="#666666" value="{{time}}" bindchange="slideChange"></slider>
+    </view>
+    <view class="task_text">
+      <view class="task_title">
+        给自己设定运动时间目标
+      </view>
+      <view class="task_desc">
+        在接下来的{{time}}分钟内，你将专注于运动
+      </view>
+    </view>
+    <view class="start" bindtap="start">
+      开始运动
+    </view>
+  </view>
+</view>
+
+<view class="clock" hidden="{{!clockShow}}" style="height:{{clockHeight}}rpx">
+  <view class="progress">
+    <canvas canvas-id="progress_bg" class="progress_bg">
+    </canvas>
+    <canvas canvas-id="progress_active" class="progress_active">
+    </canvas>
+    <view class="progress_text">
+      {{timeStr}}
+    </view>
+  </view>
+	<view class="btns">
+		<view class="okBtn" bindtap="ok" wx:if="{{okShow}}">返回</view>
+		<view class="pauseBtn" bindtap="pause" wx:if="{{pauseShow}}">暂停</view>
+		<view class="continueCancleBtn" wx:if="{{continueCancleShow}}">
+			<view class="continueBtn" bindtap="continue">继续</view>
+			<view class="cancleBtn" bindtap="cancle">放弃</view>
+		</view>
+	</view>
+</view>

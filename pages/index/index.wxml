@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="page__hd">
+  <view class="page__title">
+   <text class="title" >总摄入:</text>
+   <text class="data"> {{total_takein}}</text>
+     <text class="unit">大卡</text>
+   </view>
+  <view class="page__title">
+   <text class="title">总消耗: </text>
+   <text class="data">{{total_consume}}</text>
+   <text class="unit">大卡</text>
+  </view>
+  <view class="page__title">
+   <text class="title">热量差: </text>
+   <text class="data">{{sub}}</text>
+   <text class="unit">大卡</text>
+  </view>
+  <text style='font-size:14px;color:#AAAAAA'>tip：总消耗=体力活动消耗+基础代谢消耗</text>
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <view class="kind-list">
+      <block wx:for="{{list}}" wx:key="id">
+        <view class="kind-list__item">
+          <view id="{{item.id}}" class="weui-flex kind-list__item-hd {{item.open ? 'kind-list__item-hd_show' : ''}}" bindtap="kindToggle">
+            <view class="weui-flex__item" decode><image src="{{item.image}}" mode="aspectFit" style="width:25px; height:25px;"></image>　{{item.name}}</view>
+            <view wx:if="{{item.items.length<1}}">
+              <image class="kind-list__img" src="/images/add.png"></image>
+            </view>
+            <view wx:else>
+              {{item.total}}大卡
+            </view>
+          </view>
+          <view class="kind-list__item-bd {{item.open ? 'kind-list__item-bd_show' : ''}}">
+            <view class="weui-cells {{item.open ? 'weui-cells_show' : ''}}">
+              <block wx:for="{{item.items}}" wx:for-item="item" wx:key="*this">
+                <view class="weui-cell weui-cell_access">
+                  <view class="weui-cell__bd">{{item['name']}}</view>
+                  <view class="weui-cell__ft">{{item['cal']}}大卡  {{item['weight']}}g</view>
+                  <view style='padding-left:20px'><icon type="cancel" size="23" bindtap='delFood' id='{{index}}'></icon></view>
+                </view>
+              </block>
+              <view class="weui-cell">
+                <button class="weui-btn mini-btn" type="primary" size="mini" bindtap='addFood'>+</button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
